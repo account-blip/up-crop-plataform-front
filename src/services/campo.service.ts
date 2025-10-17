@@ -8,7 +8,6 @@ import { CampoSchemaType, UpdateCampoSchemaType } from "@/schemas/campo.schema";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-
 export const getCampos = async (authToken?: string) => {
     try {
       const response = await fetch(`${BASE_URL}/campos`, {
