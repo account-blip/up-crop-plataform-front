@@ -6,7 +6,7 @@ import AppBreadcrumb from "./app-breadcrumb"
 
 interface AppNavbarProps {
   children: ReactNode
-  adminSidebar: ReactNode
+  adminSidebar?: ReactNode
 }
 
 export async function AppNavbar({ children, adminSidebar }: AppNavbarProps) {
@@ -28,6 +28,7 @@ export async function AppNavbar({ children, adminSidebar }: AppNavbarProps) {
                 email: user?.email ?? "",
                 name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`,
                 role: user?.role || "ADMIN",
+                campo: user?.campo
               }}
             />
           </div>

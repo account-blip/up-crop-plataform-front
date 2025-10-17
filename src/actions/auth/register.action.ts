@@ -24,7 +24,7 @@ export async function registerAction({
       return { error: 'Invalid fields' };
     }
 
-    const { email, username, firstName, lastName, password } =
+    const { email, username, firstName, lastName, password, role, campoId } =
       validatedFields.data;
 
     const existingUser = await getUserByEmail(
@@ -50,9 +50,10 @@ export async function registerAction({
       lastName,
       username,
       email,
+      campoId,
       password,
       emailVerified: isVerified ? new Date().toISOString() : undefined,
-      role: 'ADMIN' as const,
+      role
     };
 
     const user = await createUser(userData, process.env.API_SECRET_TOKEN!);

@@ -9,7 +9,7 @@ export default async function ProtectedLayout({
   const session = await auth();
   return (
     <SessionProvider session={session}>
-        <div className="flex flex-col w-full h-[100dvh] overflow-hidden">
+        <div className="flex flex-col w-full min-h-screen overflow-y-auto">
           {children}
         </div>
     </SessionProvider>

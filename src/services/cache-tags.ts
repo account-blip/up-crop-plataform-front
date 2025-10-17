@@ -2,6 +2,10 @@ export type ServiceName =
   | 'users'
   | 'campos'
   | 'camposEspecificos'
+  | 'cuarteles'
+  | 'variedades'
+  | 'portainjertos'
+  | 'estimacionesDeCosecha'
 
 // Define the cache tags structure
 export const CACHE_TAGS = {
@@ -14,6 +18,18 @@ export const CACHE_TAGS = {
   },
   camposEspecificos: {
     all: 'camposEspecificos',
+  },
+  cuarteles: {
+    all: 'cuarteles',
+  },
+  variedades: {
+    all: 'variedades',
+  },
+  portainjertos: {
+    all: 'portainjertos',
+  },
+  estimacionesDeCosecha: {
+    all: 'estimacionesDeCosecha',
   },
 } as const;
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useTransition, useEffect } from "react"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -17,12 +17,22 @@ import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import Link from "next/link"
+import { Campo } from "@/types/campo.type"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { USER_ROLES, UserRole } from "@/types/user.type"
 
 interface AuthFormProps {
   mode?: 'login' | 'register'
+  campos?: Campo[]
 }
 
-export function AuthForm({ mode = 'login' }: AuthFormProps) {
+export function AuthForm({ mode = 'login', campos }: AuthFormProps) {
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -109,6 +119,8 @@ export function AuthForm({ mode = 'login' }: AuthFormProps) {
       username: "",
       firstName: "",
       lastName: "",
+      campoId: "",
+      role: USER_ROLES[1],
       password: "",
       confirmPassword: "",
     },
@@ -117,6 +129,7 @@ export function AuthForm({ mode = 'login' }: AuthFormProps) {
   const onRegisterSubmit = (values: RegisterSchemaType) => {
     setError(undefined);
     setSuccess(undefined);
+    console.log(values)
 
     startTransition(() => {
       registerAction({ values, isVerified: false })
@@ -328,6 +341,61 @@ export function AuthForm({ mode = 'login' }: AuthFormProps) {
                     )}
                   </div>
                 </div>
+
+                <div className="space-y-1">
+                    <Label htmlFor="campoId" className="text-foreground">
+                      Seleccione el Campo al que pertenece
+                    </Label>
+                    <div className="relative">
+                    <Controller
+                    name="campoId"
+                    control={registerForm.control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value || ""}
+                        onValueChange={(value) => field.onChange(String(value))}
+                      >
+                        <SelectTrigger className="pl-4 border-2 border-primary/30 focus:border-primary focus:ring-primary rounded-xl h-12">
+                          <SelectValue placeholder="Selecciona un campo" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {campos?.map((campo) => (
+                            <SelectItem key={campo.id} value={String(campo.id)}>
+                              {campo.nombre}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+
+                    </div>
+                  </div>
+
+
+                <div className="space-y-1">
+                    <Label htmlFor="role" className="text-foreground">
+                      Rol
+                    </Label>
+                    <div className="relative">
+                    <Select
+                        {...registerForm.register("role")}
+                        onValueChange={(value) => registerForm.setValue("role", value as UserRole)}
+                      >
+                        <SelectTrigger className="pl-4 border-2 border-primary/30 focus:border-primary focus:ring-primary rounded-xl h-12">
+                          <SelectValue placeholder="Selecciona un rol" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {USER_ROLES.filter((r) => r !== "ADMIN").map((role) => (
+                            <SelectItem key={role} value={role}>
+                              {role}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
 
                 {/* Password Fields */}
                 <div className="space-y-1">

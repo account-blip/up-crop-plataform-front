@@ -18,6 +18,10 @@ import {
   Ticket,
   DollarSignIcon,
   MapPinHouseIcon,
+  AlignHorizontalJustifyCenter,
+  HousePlusIcon,
+  BoxIcon,
+  ListOrdered,
 } from 'lucide-react';
 
 import {
@@ -36,6 +40,26 @@ export const adminNavItems = [
     icon: <MapPinHouseIcon />,
   },
   {
+    title: 'Campos Especificos',
+    url: '/admin/campos-especificos',
+    icon: <AlignHorizontalJustifyCenter />,
+  },
+  {
+    title: 'Cuarteles',
+    url: '/admin/cuarteles',
+    icon: <HousePlusIcon />,
+  },
+  {
+    title: 'Variedades',
+    url: '/admin/variedades',
+    icon: <BoxIcon />,
+  },
+    {
+    title: 'Portainertos',
+    url: '/admin/portainjertos',
+    icon: <ListOrdered />,
+  },
+  {
     title: 'Volver',
     url: '/home',
     icon: <ArrowLeft />,
@@ -48,16 +72,17 @@ export function AdminNavbarSidebar({
   return (
     <Sidebar
       collapsible="icon"
-      className="group/sidebar border-r bg-background overflow-hidden"
+      className="group/sidebar border-r overflow-hidden bg-gradient-to-b from-[#0a0e2e] via-[#0b1344] to-[#0f184f]"
       {...props}
     >
-      <SidebarHeader className="h-16 border-b flex justify-center items-center bg-background">
-        <SidebarTrigger className="h-9 w-9 rounded-lg hover:bg-gradient-to-r hover:from-primary/20 hover:to-primary/10 hover:text-white transition-all duration-200" />
+      <SidebarHeader className="h-16 border-b flex justify-center items-center bg-white/5 backdrop-blur supports-[backdrop-filter]:bg-white/10">
+        <SidebarTrigger className="h-9 w-9 cursor-pointer rounded-lg bg-white/5 hover:bg-white/10 hover:shadow hover:shadow-blue-500/20 transition-all duration-200" />
       </SidebarHeader>
-      <SidebarContent className="py-1 bg-background overflow-hidden">
+      <SidebarContent className="py-2 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-20 [mask-image:radial-gradient(80%_50%_at_50%_0%,#000_40%,transparent_100%)]" />
         <NavMain items={adminNavItems} />
       </SidebarContent>
-      <SidebarRail className="after:bg-border after:opacity-50 hover:after:opacity-100 after:transition-opacity" />
+      <SidebarRail className="after:bg-white/10 after:opacity-50 hover:after:opacity-100 after:transition-opacity" />
     </Sidebar>
   );
 }

@@ -9,9 +9,9 @@ import { CampoEspecificoSchemaType, UpdateCampoEspecificoSchemaType } from "@/sc
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
-export const getCamposEspecificos = async (authToken?: string) => {
+export const getCamposEspecificos = async (authToken?: string, userId?: string) => {
     try {
-      const response = await fetch(`${BASE_URL}/camposEspecificos`, {
+      const response = await fetch(`${BASE_URL}/campos-especificos/user/${userId}`, {
         headers: await getAuthHeaders(authToken),
         next: {
           tags: [getCacheTag('camposEspecificos', 'all')],
@@ -33,7 +33,7 @@ export const getCamposEspecificos = async (authToken?: string) => {
 
   export const getCampoEspecificoById = async (campoEspecificoId:string, authToken?: string) => {
     try {
-      const response = await fetch(`${BASE_URL}/camposEspecificos/${campoEspecificoId}`, {
+      const response = await fetch(`${BASE_URL}/campos-especificos/${campoEspecificoId}`, {
         headers: await getAuthHeaders(authToken),
       });
       const data = await response.json();
@@ -54,7 +54,7 @@ export const createCampoEspecifico = async (
     values: CampoEspecificoSchemaType, authToken?: string
   ) => {
     try {
-      const response = await fetch(`${BASE_URL}/camposEspecificos`, {
+      const response = await fetch(`${BASE_URL}/campos-especificos`, {
         method: 'POST',
         headers: await getAuthHeaders(authToken),
         body: JSON.stringify(values),
@@ -80,7 +80,7 @@ export const createCampoEspecifico = async (
     campo: Partial<UpdateCampoEspecificoSchemaType>, authToken?: string
   ) => {
     try {
-      const response = await fetch(`${BASE_URL}/camposEspecificos/${id}`, {
+      const response = await fetch(`${BASE_URL}/campos-especificos/${id}`, {
         method: 'PATCH',
         headers: await getAuthHeaders(authToken),
         body: JSON.stringify(campo),
@@ -102,7 +102,7 @@ export const createCampoEspecifico = async (
   
   export const deleteCampoEspecifico = async (id: string, authToken?: string) => {
     try {
-      const response = await fetch(`${BASE_URL}/camposEspecificos/${id}`, {
+      const response = await fetch(`${BASE_URL}/campos-especificos/${id}`, {
         headers: await getAuthHeaders(authToken),
         method: 'DELETE',
       });

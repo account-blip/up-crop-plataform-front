@@ -1,3 +1,4 @@
+import { USER_ROLES } from '@/types/user.type';
 import { z } from 'zod';
 
 export const registerSchema = z
@@ -12,6 +13,8 @@ export const registerSchema = z
       .string()
       .min(2, 'El apellido debe tener al menos 2 caracteres')
       .max(50, 'El apellido no puede tener más de 50 caracteres'),
+    campoId: z.string().nonempty('El campo es requerido'),
+    role: z.enum(USER_ROLES),
     password: z
       .string()
       .min(8, 'La contraseña debe tener al menos 8 caracteres'),

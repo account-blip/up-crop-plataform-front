@@ -25,6 +25,7 @@ import { toast } from 'sonner';
 import { Campo } from '@/types/campo.type';
 import { deleteCampoSchema, DeleteCampoSchemaType } from '@/schemas/campo.schema';
 import { deleteCampoAction } from '@/actions/campo/delete-campo.action';
+import { Trash2 } from 'lucide-react';
 
 const DELETE_CAMPO_TEXT = 'Eliminar campo';
 
@@ -64,13 +65,14 @@ export function DeleteCampoDialog({ campo }: { campo: Campo }) {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button
+        <Button
             variant="ghost"
-            className="w-full justify-start"
+            className="w-full justify-start text-destructive"
             size="sm"
             onClick={() => setOpen(true)}
           >
-            Eliminar Campo
+            <Trash2 className="mr-2 h-4 w-4" />
+            Eliminar
           </Button>
         </DialogTrigger>
 

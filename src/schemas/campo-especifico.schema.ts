@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const campoEspecificoSchema = z.object({
-  nombre: z.string().min(2, 'La descripcion debe tener al menos 2 caracteres').max(650, 'Máximo 650 caracteres')
+  nombre: z.string().min(2, 'La descripcion debe tener al menos 2 caracteres').max(650, 'Máximo 650 caracteres'),
+  campoId: z.string()
 });
 
 export type CampoEspecificoSchemaType = z.infer<typeof campoEspecificoSchema>;
@@ -9,6 +10,7 @@ export type CampoEspecificoSchemaType = z.infer<typeof campoEspecificoSchema>;
 
 export const updateCampoEspecificoSchema = z.object({
   nombre: z.string().min(2, 'La descripcion debe tener al menos 2 caracteres').max(650, 'Máximo 650 caracteres'),
+  campoId: z.string()
   });
   export type UpdateCampoEspecificoSchemaType = z.infer<typeof updateCampoEspecificoSchema>;
 

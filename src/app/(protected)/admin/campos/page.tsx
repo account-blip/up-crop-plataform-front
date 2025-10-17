@@ -1,7 +1,7 @@
 import { getCampos } from "@/services/campo.service"
 import { campoColumns } from "./components/campo-columns"
 import { CreateCampoDialog } from "./components/create-campo-dialog"
-import { Database } from "lucide-react"
+import { Database, MapPinHouseIcon } from "lucide-react"
 import { GlobalTable } from "@/components/table"
 
 export default async function CampoPage() {
@@ -14,7 +14,7 @@ export default async function CampoPage() {
           <div className="flex items-center justify-between py-6 sm:py-8">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Database className="h-5 w-5 text-primary" />
+                <MapPinHouseIcon className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h1 className="text-2xl font-semibold tracking-tight text-foreground">Gestión de Campos</h1>

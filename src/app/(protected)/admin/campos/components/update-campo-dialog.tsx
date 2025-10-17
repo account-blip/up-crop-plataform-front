@@ -18,6 +18,7 @@ import { Campo } from '@/types/campo.type';
 import { updateCampoSchema, UpdateCampoSchemaType } from '@/schemas/campo.schema';
 import { updateCampoAction } from '@/actions/campo/update-campo.action';
 import { Input } from '@/components/ui/input';
+import { Pencil } from 'lucide-react';
 
 
 
@@ -57,7 +58,8 @@ export function UpdateCampoDialog({ campo }: { campo: Campo }) {
             size="sm"
             onClick={() => setOpen(true)}
           >
-            Editar Campo
+          <Pencil className="mr-2 h-4 w-4" />
+          Editar
           </Button>
       </DialogTrigger>
 
@@ -72,7 +74,7 @@ export function UpdateCampoDialog({ campo }: { campo: Campo }) {
               name="nombre"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descripcion</FormLabel>
+                  <FormLabel>Nombre</FormLabel>
                   <FormControl>
                     <Input disabled={isPending} {...field} />
                   </FormControl>

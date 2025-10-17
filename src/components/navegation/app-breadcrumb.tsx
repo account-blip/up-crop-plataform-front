@@ -16,6 +16,22 @@ export default function AppBreadcrumb() {
   const pathname = usePathname()
   const segments = pathname.split("/").filter(Boolean)
 
+  const SEGMENT_LABELS: Record<string, string> = {
+    admin: "Admin",
+    "estimacion-de-cosecha": "Estimación de Cosecha",
+    "datos-reservados": "Datos Reservados",
+    home: "Inicio",
+  }
+
+  const toTitle = (seg: string) => {
+    const decoded = decodeURIComponent(seg)
+    if (SEGMENT_LABELS[decoded]) return SEGMENT_LABELS[decoded]
+    return decoded
+      .split("-")
+      .map((w) => (w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w))
+      .join(" ")
+  }
+
   return (
     <>
       <Separator orientation="vertical" className="h-6" />
@@ -41,15 +57,15 @@ export default function AppBreadcrumb() {
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     {isLast || seg === "admin" ? (
-                      <BreadcrumbPage className="font-medium capitalize">
-                        {seg}
+                      <BreadcrumbPage className="font-medium">
+                        {toTitle(seg)}
                       </BreadcrumbPage>
                     ) : (
                       <BreadcrumbLink
                         href={href}
-                        className="capitalize text-muted-foreground hover:text-foreground"
+                        className="text-muted-foreground hover:text-foreground"
                       >
-                        {seg}
+                        {toTitle(seg)}
                       </BreadcrumbLink>
                     )}
                   </BreadcrumbItem>
