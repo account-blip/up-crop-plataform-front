@@ -119,7 +119,6 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
       username: "",
       firstName: "",
       lastName: "",
-      empresaId: "",
       role: USER_ROLES[1],
       password: "",
       confirmPassword: "",
@@ -341,36 +340,6 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
                     )}
                   </div>
                 </div>
-
-                <div className="space-y-1">
-                    <Label htmlFor="campoId" className="text-foreground">
-                      Seleccione el Campo al que pertenece
-                    </Label>
-                    <div className="relative">
-                    <Controller
-                    name="empresaId"
-                    control={registerForm.control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value || ""}
-                        onValueChange={(value) => field.onChange(String(value))}
-                      >
-                        <SelectTrigger className="pl-4 border-2 border-primary/30 focus:border-primary focus:ring-primary rounded-xl h-12">
-                          <SelectValue placeholder="Selecciona un campo" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {empresas?.map((empresa) => (
-                            <SelectItem key={empresa.id} value={String(empresa.id)}>
-                              {empresa.nombre}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-
-                    </div>
-                  </div>
 
 
                 <div className="space-y-1">
