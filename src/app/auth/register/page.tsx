@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { getEmpresas } from '@/services/empresa.service'
 import { AuthForm } from '../components/auth-form'
