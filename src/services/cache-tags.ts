@@ -1,7 +1,7 @@
 export type ServiceName =
   | 'users'
-  | 'campos'
-  | 'camposEspecificos'
+  | 'empresas'
+  | 'unidadesProductivas'
   | 'cuarteles'
   | 'variedades'
   | 'portainjertos'
@@ -13,11 +13,11 @@ export const CACHE_TAGS = {
     all: 'users',
     single: (id: string) => `user-${id}`,
   },
-  campos: {
-    all: 'campos',
+  empresas: {
+    all: 'empresas',
   },
-  camposEspecificos: {
-    all: 'camposEspecificos',
+  unidadesProductivas: {
+    all: 'unidadesProductivas',
   },
   cuarteles: {
     all: 'cuarteles',

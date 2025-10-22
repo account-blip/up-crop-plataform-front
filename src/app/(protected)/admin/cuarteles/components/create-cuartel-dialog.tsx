@@ -23,7 +23,7 @@ import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { cuartelSchema, CuartelSchemaType } from '@/schemas/cuartel.schema';
 import { createCuartelAction } from '@/actions/cuartel/create-cuartel.action';
-import { CampoEspecifico } from '@/types/campo-especifico.type';
+import { UnidadProductiva } from '@/types/unidad-productiva.type';
 import {
   Select,
   SelectContent,
@@ -32,7 +32,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export function CreateCuartelDialog({camposEspecificos}:{camposEspecificos:CampoEspecifico[]}) {
+export function CreateCuartelDialog({unidadesProductivas}:{unidadesProductivas:UnidadProductiva[]}) {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
@@ -42,7 +42,7 @@ export function CreateCuartelDialog({camposEspecificos}:{camposEspecificos:Campo
     resolver: zodResolver(cuartelSchema),
     defaultValues: {
       nombre: '',
-      campoEspecificoId: ''
+      unidadProductivaId: ''
     },
   });
 
@@ -96,23 +96,23 @@ export function CreateCuartelDialog({camposEspecificos}:{camposEspecificos:Campo
 
             <FormField
               control={form.control}
-              name="campoEspecificoId"
+              name="unidadProductivaId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Campo</FormLabel>
+                  <FormLabel>Unidad Productiva</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecciona un campo" />
+                        <SelectValue placeholder="Selecciona una unidad" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {camposEspecificos.map((campo) => (
-                        <SelectItem key={campo.id} value={String(campo.id)}>
-                          {campo.nombre}
+                      {unidadesProductivas.map((unidad) => (
+                        <SelectItem key={unidad.id} value={String(unidad.id)}>
+                          {unidad.nombre}
                         </SelectItem>
                       ))}
                     </SelectContent>

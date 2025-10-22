@@ -28,7 +28,7 @@ export async function AppNavbar({ children, adminSidebar }: AppNavbarProps) {
                 email: user?.email ?? "",
                 name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`,
                 role: user?.role || "ADMIN",
-                campo: user?.campo
+                empresa: user?.empresa
               }}
             />
           </div>

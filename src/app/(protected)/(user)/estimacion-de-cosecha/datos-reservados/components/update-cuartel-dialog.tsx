@@ -25,12 +25,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CampoEspecifico } from '@/types/campo-especifico.type';
+import { UnidadProductiva } from '@/types/unidad-productiva.type';
 import { Pencil } from 'lucide-react';
 
 
 
-export function UpdateCuartelDialog({ cuartel, camposEspecificos }: { cuartel: Cuartel, camposEspecificos:CampoEspecifico[] }) {
+export function UpdateCuartelDialog({ cuartel, unidadesProductivas }: { cuartel: Cuartel, unidadesProductivas:UnidadProductiva[] }) {
 
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
@@ -39,7 +39,7 @@ export function UpdateCuartelDialog({ cuartel, camposEspecificos }: { cuartel: C
     resolver: zodResolver(updateCuartelSchema),
     defaultValues: {
       nombre: cuartel.nombre || '',
-      campoEspecificoId: cuartel.campoEspecifico.id || ''
+      unidadProductivaId: cuartel.unidadesProductiva.id || ''
     },
   });
 
@@ -93,7 +93,7 @@ export function UpdateCuartelDialog({ cuartel, camposEspecificos }: { cuartel: C
             />
             <FormField
               control={form.control}
-              name="campoEspecificoId"
+              name="unidadProductivaId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Campo</FormLabel>
@@ -107,7 +107,7 @@ export function UpdateCuartelDialog({ cuartel, camposEspecificos }: { cuartel: C
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {camposEspecificos.map((campo) => (
+                      {unidadesProductivas.map((campo) => (
                         <SelectItem key={campo.id} value={String(campo.id)}>
                           {campo.nombre}
                         </SelectItem>

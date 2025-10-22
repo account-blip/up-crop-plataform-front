@@ -13,7 +13,7 @@ export const registerSchema = z
       .string()
       .min(2, 'El apellido debe tener al menos 2 caracteres')
       .max(50, 'El apellido no puede tener más de 50 caracteres'),
-    campoId: z.string().nonempty('El campo es requerido'),
+      empresaId: z.string().nonempty('El campo es requerido'),
     role: z.enum(USER_ROLES),
     password: z
       .string()

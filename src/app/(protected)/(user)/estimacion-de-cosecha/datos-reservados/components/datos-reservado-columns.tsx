@@ -12,7 +12,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
 import type { EstimacionDeCosecha } from "@/types/estimacion-de-cosecha.type"
-import type { CampoEspecifico } from "@/types/campo-especifico.type"
+import type { UnidadProductiva } from "@/types/unidad-productiva.type"
 import type { Cuartel } from "@/types/cuartel.type"
 import type { Variedad } from "@/types/variedad.type"
 import type { Portainjerto } from "@/types/portainjerto.type"
@@ -20,7 +20,7 @@ import { format } from "date-fns";
 
 
 export const datosReservadoColumns = (
-  camposEspecificos: CampoEspecifico[],
+  unidadesProductivas: UnidadProductiva[],
   cuarteles: Cuartel[],
   variedades: Variedad[],
   portainjertos: Portainjerto[],
@@ -92,20 +92,20 @@ export const datosReservadoColumns = (
     },
   },
   {
-    accessorFn: (row) => row.campoEspecifico?.nombre ?? "",
+    accessorFn: (row) => row.unidadProductiva?.nombre ?? "",
     id: "campoEspecifico",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Campo Especifico" />,
     cell: ({ row }) => {
-      const campoEspecifico = row.original.campoEspecifico
-      return <div className="min-w-[120px] text-sm">{campoEspecifico ? campoEspecifico.nombre : "—"}</div>
+      const unidadProductiva = row.original.unidadProductiva
+      return <div className="min-w-[120px] text-sm">{unidadProductiva ? unidadProductiva.nombre : "—"}</div>
     },
   },  
   {
-    accessorKey: "campoEspecifico.campo",
+    accessorKey: "unidadProductiva.empresa",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Campo" />,
     cell: ({ row }) => {
-      const campo = row.original.campoEspecifico?.campo
-      return <div className="min-w-[120px] text-sm">{campo ? campo.nombre : "—"}</div>
+      const empresa = row.original.unidadProductiva?.empresa
+      return <div className="min-w-[120px] text-sm">{empresa ? empresa.nombre : "—"}</div>
     },
   },
   {

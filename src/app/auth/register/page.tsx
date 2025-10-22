@@ -1,10 +1,10 @@
-import { getCampos } from '@/services/campo.service'
+import { getEmpresas } from '@/services/empresa.service'
 import { AuthForm } from '../components/auth-form'
 
 export default async function RegisterPage() {
-  const campos = await getCampos()
+  const empresas = await getEmpresas()
 
-  return <AuthForm mode="register" campos={campos?.data || []} />
+  return <AuthForm mode="register" empresas={empresas?.data || []} />
 }
 
 

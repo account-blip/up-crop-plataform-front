@@ -13,20 +13,20 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { type EstadoType, ESTADO_TYPE } from "@/types/estimacion-de-cosecha.type"
 import { Variedad } from "@/types/variedad.type"
-import { CampoEspecifico } from "@/types/campo-especifico.type"
+import { UnidadProductiva } from "@/types/unidad-productiva.type"
 
 interface AdvancedFiltersProps<TData> {
   table: Table<TData>
   estados?: EstadoType[]
   variedades?: Variedad[]
-  camposEspecificos?: CampoEspecifico[]
+  unidadesProductivas?: UnidadProductiva[]
 }
 
 export function AdvancedFilters<TData>({
   table,
   estados = [...ESTADO_TYPE],
   variedades = [],
-  camposEspecificos = [],
+  unidadesProductivas = [],
 }: AdvancedFiltersProps<TData>) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [selectedDate, setSelectedDate] = useState<Date>()
@@ -257,7 +257,7 @@ export function AdvancedFilters<TData>({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Todos los campos</SelectItem>
-                  {camposEspecificos.map((campo) => (
+                  {unidadesProductivas.map((campo) => (
                     <SelectItem key={campo.id} value={campo.nombre}>
                       {campo.nombre}
                     </SelectItem>

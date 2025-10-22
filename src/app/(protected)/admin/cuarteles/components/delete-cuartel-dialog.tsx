@@ -22,9 +22,6 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { Campo } from '@/types/campo.type';
-import { deleteCampoSchema, DeleteCampoSchemaType } from '@/schemas/campo.schema';
-import { deleteCampoAction } from '@/actions/campo/delete-campo.action';
 import { Cuartel } from '@/types/cuartel.type';
 import { deleteCuartelSchema, DeleteCuartelSchemaType } from '@/schemas/cuartel.schema';
 import { deleteCuartelAction } from '@/actions/cuartel/delete-cuartel.action';
@@ -70,7 +67,7 @@ export function DeleteCuartelDialog({ cuartel }: { cuartel: Cuartel }) {
         <DialogTrigger asChild>
         <Button
             variant="ghost"
-            className="w-full justify-start text-destructive"
+            className="w-1/2 justify-start text-destructive"
             size="sm"
             onClick={() => setOpen(true)}
           >

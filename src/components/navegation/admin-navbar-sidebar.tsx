@@ -1,27 +1,12 @@
 'use client';
 
 import {
-  CreditCardIcon,
-  HandCoins,
-  Home,
-  HelpCircle,
-  User2,
-  Scale,
-  BarChart,
-  UserCheck,
   ArrowLeft,
-  Globe,
-  User,
-  Wallet,
-  Banknote,
-  ParkingCircle,
-  Ticket,
-  DollarSignIcon,
   MapPinHouseIcon,
   AlignHorizontalJustifyCenter,
   HousePlusIcon,
   BoxIcon,
-  ListOrdered,
+  Users2
 } from 'lucide-react';
 
 import {
@@ -32,43 +17,58 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar';
 import { NavMain } from './nav-main';
+import { currentUser } from '@/lib/auth';
+import { useSession } from 'next-auth/react';
 
 export const adminNavItems = [
   {
-    title: 'Campos',
-    url: '/admin/campos',
+    title: 'Empresas',
+    url: '/admin/empresas',
     icon: <MapPinHouseIcon />,
+    roles: ['SUPERADMIN'],
+    
   },
   {
-    title: 'Campos Especificos',
-    url: '/admin/campos-especificos',
+    title: 'Unidades Productivas',
+    url: '/admin/unidades-productivas',
     icon: <AlignHorizontalJustifyCenter />,
+    roles: ['ADMIN', 'SUPERADMIN'],
   },
   {
     title: 'Cuarteles',
     url: '/admin/cuarteles',
     icon: <HousePlusIcon />,
+    roles: ['ADMIN', 'SUPERADMIN'],
   },
   {
     title: 'Variedades',
     url: '/admin/variedades',
     icon: <BoxIcon />,
+    roles: ['ADMIN', 'SUPERADMIN'],
   },
-    {
-    title: 'Portainertos',
-    url: '/admin/portainjertos',
-    icon: <ListOrdered />,
+  {
+    title: 'Usuarios',
+    url: '/admin/users',
+    icon: <Users2 />,
+    roles: ['SUPERADMIN'],
+    
   },
   {
     title: 'Volver',
     url: '/home',
     icon: <ArrowLeft />,
+    roles: ['ADMIN', 'SUPERADMIN'],
   },
 ];
 
-export function AdminNavbarSidebar({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
+
+export function AdminNavbarSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+  const { data: session } = useSession();
+
+  const filteredItems = adminNavItems.filter(item =>
+    item.roles.includes(session?.user.role ?? 'ADMIN')
+  )
+
   return (
     <Sidebar
       collapsible="icon"
@@ -80,9 +80,9 @@ export function AdminNavbarSidebar({
       </SidebarHeader>
       <SidebarContent className="py-2 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 opacity-20 [mask-image:radial-gradient(80%_50%_at_50%_0%,#000_40%,transparent_100%)]" />
-        <NavMain items={adminNavItems} />
+        <NavMain items={filteredItems} />
       </SidebarContent>
       <SidebarRail className="after:bg-white/10 after:opacity-50 hover:after:opacity-100 after:transition-opacity" />
     </Sidebar>
-  );
+  )
 }

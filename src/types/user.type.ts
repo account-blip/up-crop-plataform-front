@@ -1,7 +1,7 @@
-import { Campo } from "./campo.type";
+import { Empresa } from "./empresa.type";
 import { EstimacionDeCosecha } from "./estimacion-de-cosecha.type";
 
-export const USER_ROLES = ['ADMIN', 'PRODUCTOR', 'INSPECTOR', 'BODEGA'] as const;
+export const USER_ROLES = ['SUPERADMIN','ADMIN', 'PRODUCTOR', 'INSPECTOR', 'BODEGA'] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
 export type User = {
@@ -12,7 +12,7 @@ export type User = {
   email: string;
   emailVerified: boolean;
   role: UserRole;
-  campo: Campo;
+  empresa: Empresa;
   estimacionesDeCosecha: EstimacionDeCosecha[];
   deletedAt?: string | null;
   createdAt: string;

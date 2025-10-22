@@ -11,7 +11,7 @@ import {
 import { loginUser } from './services/auth.service';
 import Google from 'next-auth/providers/google';
 import { UserRole } from './types/user.type';
-import { Campo } from './types/campo.type';
+import { Empresa } from './types/empresa.type';
 
 
 declare module 'next-auth' {
@@ -20,7 +20,7 @@ declare module 'next-auth' {
     lastName: string;
     accessToken?: string;
     role: UserRole;
-    campo: Campo;
+    empresa: Empresa;
   }
 
   interface Session {
@@ -30,7 +30,7 @@ declare module 'next-auth' {
       firstName: string;
       lastName: string;
       role: UserRole;
-      campo: Campo;
+      empresa: Empresa;
     } & DefaultSession['user'];
     token: string;
   }
@@ -44,7 +44,7 @@ declare module 'next-auth/jwt' {
     lastName?: string;
     accessToken?: string;
     role?: UserRole;
-    campo: Campo;
+    empresa: Empresa;
     exp?: number;
   }
 }
@@ -123,7 +123,7 @@ export const { unstable_update, auth, handlers, signIn, signOut } = NextAuth({
             user.role = existingUser.role;
             user.firstName = existingUser.firstName;
             user.lastName = existingUser.lastName;
-            user.campo = existingUser.campo;
+            user.empresa = existingUser.empresa;
           }
           return true;
         }
@@ -152,7 +152,7 @@ export const { unstable_update, auth, handlers, signIn, signOut } = NextAuth({
             firstName: token.firstName as string,
             lastName: token.lastName as string,
             role: token.role as UserRole,
-            campo: token.campo as Campo,
+            empresa: token.empresa as Empresa,
           };
           Object.assign(session, { token: token.accessToken });
 
@@ -171,7 +171,7 @@ export const { unstable_update, auth, handlers, signIn, signOut } = NextAuth({
             token.firstName = user.firstName;
             token.lastName = user.lastName;
             token.role = user.role;
-            token.campo = user.campo;
+            token.empresa = user.empresa;
             token.accessToken = user.accessToken || token.accessToken;
           }
       
@@ -195,7 +195,7 @@ export const { unstable_update, auth, handlers, signIn, signOut } = NextAuth({
                 firstName: existingUser.firstName,
                 lastName: existingUser.lastName,
                 role: existingUser.role,
-                campo: existingUser.campo,
+                empresa: existingUser.empresa,
               },
               process.env.NEXTAUTH_SECRET!,
               { expiresIn: '30d' },

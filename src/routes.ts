@@ -39,4 +39,4 @@ export const publicApiRoutes = [];
  * The default path to redirect users after they successfully log in.
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = '/home';
+export const DEFAULT_LOGIN_REDIRECT = '/dashboard';

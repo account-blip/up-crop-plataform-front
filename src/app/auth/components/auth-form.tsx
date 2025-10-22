@@ -17,7 +17,6 @@ import { FormError } from "@/components/form-error"
 import { FormSuccess } from "@/components/form-success"
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import Link from "next/link"
-import { Campo } from "@/types/campo.type"
 import {
   Select,
   SelectContent,
@@ -26,13 +25,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { USER_ROLES, UserRole } from "@/types/user.type"
+import { Empresa } from "@/types/empresa.type"
 
 interface AuthFormProps {
   mode?: 'login' | 'register'
-  campos?: Campo[]
+  empresas?: Empresa[]
 }
 
-export function AuthForm({ mode = 'login', campos }: AuthFormProps) {
+export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -119,7 +119,7 @@ export function AuthForm({ mode = 'login', campos }: AuthFormProps) {
       username: "",
       firstName: "",
       lastName: "",
-      campoId: "",
+      empresaId: "",
       role: USER_ROLES[1],
       password: "",
       confirmPassword: "",
@@ -348,7 +348,7 @@ export function AuthForm({ mode = 'login', campos }: AuthFormProps) {
                     </Label>
                     <div className="relative">
                     <Controller
-                    name="campoId"
+                    name="empresaId"
                     control={registerForm.control}
                     render={({ field }) => (
                       <Select
@@ -359,9 +359,9 @@ export function AuthForm({ mode = 'login', campos }: AuthFormProps) {
                           <SelectValue placeholder="Selecciona un campo" />
                         </SelectTrigger>
                         <SelectContent>
-                          {campos?.map((campo) => (
-                            <SelectItem key={campo.id} value={String(campo.id)}>
-                              {campo.nombre}
+                          {empresas?.map((empresa) => (
+                            <SelectItem key={empresa.id} value={String(empresa.id)}>
+                              {empresa.nombre}
                             </SelectItem>
                           ))}
                         </SelectContent>

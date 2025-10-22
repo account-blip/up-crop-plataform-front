@@ -1,8 +1,7 @@
-// 📄 components/CampoEspecificoTable.tsx
 "use client"
 
 import { GlobalTable } from "@/components/table"
-import { CampoEspecifico } from "@/types/campo-especifico.type"
+import { UnidadProductiva } from "@/types/unidad-productiva.type"
 import { Cuartel } from "@/types/cuartel.type"
 import { datosReservadoColumns } from "./datos-reservado-columns"
 import { EstimacionDeCosecha } from "@/types/estimacion-de-cosecha.type"
@@ -12,24 +11,24 @@ import { Portainjerto } from "@/types/portainjerto.type"
 
 export default function DatosReservadosTable({
   estimacionDeCosecha,
-  camposEspecificos,
+  unidadesProductivas,
   cuarteles,
   variedades,
   portainjertos,
 }: {
   estimacionDeCosecha: EstimacionDeCosecha[];
-  camposEspecificos: CampoEspecifico[];
+  unidadesProductivas: UnidadProductiva[];
   cuarteles: Cuartel[];
   variedades: Variedad[];
   portainjertos: Portainjerto[];
 }) {
   return (
     <GlobalTable
-      columns={datosReservadoColumns(camposEspecificos || [], cuarteles || [], variedades || [], portainjertos || [])}
+      columns={datosReservadoColumns(unidadesProductivas || [], cuarteles || [], variedades || [], portainjertos || [])}
       variedades={variedades}
-      camposEspecificos={camposEspecificos}
+      unidadesProductivas={unidadesProductivas}
       data={estimacionDeCosecha || []}
-      filter="campoEspecifico"
+      filter="unidadesProductiva"
       rolUser={true}
     />
   )

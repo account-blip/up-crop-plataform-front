@@ -1,74 +1,42 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import type { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
-import { Cuartel } from "@/types/cuartel.type"
-import { UpdateCuartelDialog } from "./update-cuartel-dialog"
-import { DeleteCuartelDialog } from "./delete-cuartel-dialog"
-import { CampoEspecifico } from "@/types/campo-especifico.type"
+import { Eye } from "lucide-react"
+import type { Cuartel } from "@/types/cuartel.type"
+import type { UnidadProductiva } from "@/types/unidad-productiva.type"
 
-export const cuartelColumns = (camposEspecificos: CampoEspecifico[]): ColumnDef<Cuartel>[] => [
+export const cuartelColumns = (
+  unidadesProductivas: UnidadProductiva[],
+  onSelectCuartel: (cuartel: Cuartel) => void,
+): ColumnDef<Cuartel>[] => [
   {
     accessorKey: "nombre",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Nombre" />,
-    cell: ({ row }) => <div className="min-w-[100px] text-sm">{row.getValue("nombre")}</div>,
-  },
-  {
-    accessorKey: "campoEspecifico.campo",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Campo" />
+    cell: ({ row }) => (
+      <button
+        onClick={() => onSelectCuartel(row.original)}
+        className="min-w-[100px] text-sm text-left hover:text-primary transition-colors flex items-center gap-2 group"
+      >
+        <Eye className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+        {row.getValue("nombre")}
+      </button>
     ),
+  },
+  {
+    accessorKey: "unidadesProductiva.empresa",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Empresa" />,
     cell: ({ row }) => {
-      const campo = row.original.campoEspecifico?.campo
-      return (
-        <div className="min-w-[100px] text-sm">
-          {campo?.nombre ?? "—"}
-        </div>
-      )
+      const empresa = row.original.unidadesProductiva?.empresa
+      return <div className="min-w-[100px] text-sm">{empresa?.nombre ?? "—"}</div>
     },
   },
   {
-    accessorKey: "campoEspecifico",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Campo Especifico" />
-    ),
+    accessorKey: "unidadesProductiva",
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Unidad Productiva" />,
     cell: ({ row }) => {
-      const camposEspecificos = row.original.campoEspecifico
-      return (
-        <div className="min-w-[100px] text-sm">
-          {camposEspecificos ? camposEspecificos.nombre : "—"}
-        </div>
-      )
+      const unidadesProductivas = row.original.unidadesProductiva
+      return <div className="min-w-[100px] text-sm">{unidadesProductivas ? unidadesProductivas.nombre : "—"}</div>
     },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const cuartel = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuLabel className="text-sm">Acciones</DropdownMenuLabel>
-            <UpdateCuartelDialog cuartel={cuartel} camposEspecificos={camposEspecificos}/>
-            <DeleteCuartelDialog cuartel={cuartel} />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
+  }
 ]

@@ -14,7 +14,7 @@ export const getCuarteles = async (authToken?: string, userId?:string) => {
       const response = await fetch(`${BASE_URL}/cuarteles/user/${userId}`, {
         headers: await getAuthHeaders(authToken),
         next: {
-          tags: [getCacheTag('campos', 'all')],
+          tags: [getCacheTag('cuarteles', 'all')],
         },
       });
       const data = await response.json();

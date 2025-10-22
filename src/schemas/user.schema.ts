@@ -31,6 +31,7 @@ export const deleteUserSchema = z.object({
 export type DeleteUserSchemaType = z.infer<typeof deleteUserSchema>;
 
 export const updateProfileSchema = z.object({
+  email: z.string().email('El email no es válido'),
   firstName: z
     .string()
     .min(2, 'El nombre debe tener al menos 2 caracteres')
@@ -40,11 +41,12 @@ export const updateProfileSchema = z.object({
     .min(2, 'El apellido debe tener al menos 2 caracteres')
     .optional(),
   username: z.string().min(1, 'El nombre de usuario es requerido').optional(),
+  empresaId: z.string().nonempty('El campo es requerido'),
+  role: z.enum(USER_ROLES),
   password: z
     .string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
-    .optional(),
-  emailVerified: z.string().optional(),
+    .optional()
 });
 export type UpdateProfileSchemaType = z.infer<typeof updateProfileSchema>;
 

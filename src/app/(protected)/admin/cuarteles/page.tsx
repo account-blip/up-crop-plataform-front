@@ -1,10 +1,8 @@
 
-import { Camera, Database, HousePlusIcon } from "lucide-react"
-import { GlobalTable } from "@/components/table"
+import { HousePlus } from "lucide-react"
 import { getCuarteles } from "@/services/cuartel.service"
 import { CreateCuartelDialog } from "./components/create-cuartel-dialog"
-import { cuartelColumns } from "./components/cuartel-columns"
-import { getCamposEspecificos } from "@/services/campo-especifico.service"
+import { getUnidadesProductivas } from "@/services/unidad-especifica.service"
 import CuartelTable from "./components/cuartel-table"
 import { auth } from "@/auth"
 
@@ -13,33 +11,38 @@ export default async function CuartelPage() {
   const userId = session?.user?.id;
   const accessToken = session?.token;
   const cuarteles = await getCuarteles(accessToken,userId)
-  const camposEspecificos = await getCamposEspecificos(accessToken,userId)
-
+  const unidadesProductivas = await getUnidadesProductivas(accessToken,userId)
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b border-border bg-card">
+    <div className="min-h-screen bg-cocos-black">
+      <div className="border-b border-polar-bear/10 bg-cocos-black/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6 sm:py-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <HousePlusIcon className="h-5 w-5 text-primary" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-titmouse/10 border border-blue-titmouse/20">
+                <HousePlus className="h-6 w-6 text-blue-titmouse" />
               </div>
               <div>
-                <h1 className="text-2xl font-semibold tracking-tight text-foreground">Gestión de Cuarteles</h1>
-                <p className="text-sm text-muted-foreground">Administra y organiza tus registros de datos</p>
+                <h1 className="font-ivypresto text-3xl font-semibold tracking-tight text-december-sky">
+                  Gestión de Cuarteles
+                </h1>
+                <p className="text-sm text-polar-bear/70 font-urbanist">
+                  Administra y organiza los cuarteles de la empresa
+                </p>
               </div>
             </div>
-            <CreateCuartelDialog camposEspecificos={camposEspecificos?.data || []}/>
+            <CreateCuartelDialog unidadesProductivas={unidadesProductivas?.data || []}/>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <CuartelTable cuarteles={cuarteles?.data || []} camposEspecificos={camposEspecificos?.data || []}/>
+        <div className="rounded-xl border border-polar-bear/10 bg-cocos-black/30 p-6 shadow-xl">
+        <CuartelTable cuarteles={cuarteles?.data || []} unidadesProductivas={unidadesProductivas?.data || []}/>
         </div>
       </div>
     </div>
   )
 }
+
+

@@ -15,7 +15,7 @@ import {
   type EstimacionDeCosechaSchemaType,
 } from "@/schemas/estimacion-de-cosecha.schema.type"
 import { createEstimacionDeCosechaAction } from "@/actions/estimacion-de-cosecha/create-estimacion-de-cosecha.action"
-import type { CampoEspecifico } from "@/types/campo-especifico.type"
+import type { UnidadProductiva } from "@/types/unidad-productiva.type"
 import type { Cuartel } from "@/types/cuartel.type"
 import type { Variedad } from "@/types/variedad.type"
 import type { Portainjerto } from "@/types/portainjerto.type"
@@ -23,12 +23,12 @@ import { ESTADO_TYPE } from "@/types/estimacion-de-cosecha.type"
 import { Plus } from "lucide-react"
 
 export function CreateDatoReservadoDialog({
-  camposEspecificos,
+  unidadesProductivas,
   cuarteles,
   variedades,
   portainjertos,
 }: {
-  camposEspecificos: CampoEspecifico[]
+  unidadesProductivas: UnidadProductiva[]
   cuarteles: Cuartel[]
   variedades: Variedad[]
   portainjertos: Portainjerto[]
@@ -193,7 +193,7 @@ export function CreateDatoReservadoDialog({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {camposEspecificos.map((c) => (
+                        {unidadesProductivas.map((c) => (
                           <SelectItem key={c.id} value={c.id}>
                             {c.nombre}
                           </SelectItem>

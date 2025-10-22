@@ -1,6 +1,6 @@
 import { Variedad } from "./variedad.type";
 import { User } from "./user.type";
-import { CampoEspecifico } from "./campo-especifico.type";
+import { UnidadProductiva } from "./unidad-productiva.type";
 import { Cuartel } from "./cuartel.type";
 import { Portainjerto } from "./portainjerto.type";
 
@@ -16,7 +16,7 @@ export type EstimacionDeCosecha = {
     estado: EstadoType;
     foto: string;
     user: User;
-    campoEspecifico: CampoEspecifico;
+    unidadProductiva: UnidadProductiva;
     cuartel: Cuartel;
     portainjerto: Portainjerto;
     variedad: Variedad;

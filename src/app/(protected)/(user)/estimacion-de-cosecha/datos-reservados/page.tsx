@@ -1,5 +1,5 @@
 import { getCuarteles } from "@/services/cuartel.service"
-import { getCamposEspecificos } from "@/services/campo-especifico.service"
+import { getUnidadesProductivas } from "@/services/unidad-especifica.service"
 import { getEstimacionesDeCosecha } from "@/services/estimacion-de-cosecha.service"
 import { getVariedades } from "@/services/variedad.service"
 import { getPortainjertos } from "@/services/portainjerto.service"
@@ -17,7 +17,7 @@ export default async function CuartelPage() {
   const variedades = await getVariedades()
   const portainjertos = await getPortainjertos()
   const cuarteles = await getCuarteles(accessToken,userId)
-  const camposEspecificos = await getCamposEspecificos(accessToken,userId)
+  const unidadesProductivas = await getUnidadesProductivas(accessToken,userId)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50">
@@ -66,7 +66,7 @@ export default async function CuartelPage() {
               </div>
               <div>
                 <p className="text-sm font-medium text-slate-600">Campos Activos</p>
-                <p className="text-3xl font-bold text-slate-900">{camposEspecificos?.data.length || 0}</p>
+                <p className="text-3xl font-bold text-slate-900">{unidadesProductivas?.data.length || 0}</p>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default async function CuartelPage() {
         variedades={variedades?.data || []}
         portainjertos={portainjertos?.data || []}
         cuarteles={cuarteles?.data || []}
-        camposEspecificos={camposEspecificos?.data || []}
+        unidadesProductivas={unidadesProductivas?.data || []}
       />
     </div>
   </div>
@@ -128,7 +128,7 @@ export default async function CuartelPage() {
           variedades={variedades?.data || []}
           portainjertos={portainjertos?.data || []}
           cuarteles={cuarteles?.data || []}
-          camposEspecificos={camposEspecificos?.data || []}
+          unidadesProductivas={unidadesProductivas?.data || []}
           />
         </div>
       </div>

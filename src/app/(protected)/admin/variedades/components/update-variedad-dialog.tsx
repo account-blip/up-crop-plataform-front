@@ -14,13 +14,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Campo } from '@/types/campo.type';
-import { updateCampoSchema, UpdateCampoSchemaType } from '@/schemas/campo.schema';
-import { updateCampoAction } from '@/actions/campo/update-campo.action';
 import { Input } from '@/components/ui/input';
-import { Cuartel } from '@/types/cuartel.type';
-import { updateCuartelSchema, UpdateCuartelSchemaType } from '@/schemas/cuartel.schema';
-import { updateCuartelAction } from '@/actions/cuartel/update-cuartel.action';
 import { Variedad } from '@/types/variedad.type';
 import { UpdateVaridadSchemaType, updateVariedadSchema } from '@/schemas/variedad.schema';
 import { updateVariedadAction } from '@/actions/variedad/update-variedad.action';
