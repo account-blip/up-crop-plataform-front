@@ -1,7 +1,10 @@
-import { AuthForm } from '../components/auth-form'
+import { Suspense } from "react";
+import { AuthForm } from "../components/auth-form";
 
 export default function LoginPage() {
-  return <AuthForm mode="login" />
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <AuthForm mode="login" />
+    </Suspense>
+  );
 }
-
-

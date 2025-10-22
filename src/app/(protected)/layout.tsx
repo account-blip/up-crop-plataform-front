@@ -1,6 +1,8 @@
+export const dynamic = "force-dynamic";
 import { auth } from '@/auth'
 import { Sidebar } from '@/components/navegation/sidebar'
 import { SessionProvider } from 'next-auth/react'
+
 
 export default async function ProtectedLayout({
   children,
