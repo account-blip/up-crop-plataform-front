@@ -179,8 +179,9 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
                   : "opacity-0 -translate-x-full scale-95 absolute inset-0 pointer-events-none"
               }`}
             >
-              {/*<CardWrapper showSocials > */}
-
+            <CardWrapper
+                showSocials
+                >
               <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-5">
                 {/* Identifier Field */}
                 <div className="space-y-2">
@@ -256,7 +257,7 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
                   Iniciar sesión
                 </Button>
               </form>
-              {/*</CardWrapper> */}
+              </CardWrapper>
             </div>
 
             {/* Register Form */}
@@ -445,7 +446,8 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
               </form>
             </div>
           </div>
-          {/* 
+          /* 
+          {/* Toggle Link */}
           <div className="mt-4 text-center pt-4 border-t border-border/50 flex-shrink-0">
             <button
               type="button"
@@ -463,7 +465,7 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
               )}
             </button>
           </div>
-          */}
+          
         </div>
       </div>
     </div>
