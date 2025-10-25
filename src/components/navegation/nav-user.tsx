@@ -66,11 +66,11 @@ export function NavUser({
           <div className="flex flex-col gap-2 py-2">
             <p className="text-sm font-semibold text-white">{userNav.name}</p>
             <p className="text-xs text-white/70">{userNav.email}</p>
-            <div className="flex flex-col gap-2 mt-1">
-              <span className="inline-block rounded-md bg-white/10 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/20 capitalize">
+            <div className="flex flex-col gap-2 mt-1 bg-primary/10 text-primary">
+              <span className="inline-block rounded-md px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/20 capitalize bg-primary/10 text-primary">
                 {normalizedUser.role}
               </span>
-              <span className="inline-block rounded-md bg-white/10 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/20 truncate">
+              <span className="inline-block rounded-md px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/20 truncate bg-primary/10 text-primary">
                 {userNav.empresa?.nombre ?? "Up-Crop"}
               </span>
             </div>

@@ -6,6 +6,8 @@ export type ServiceName =
   | 'variedades'
   | 'portainjertos'
   | 'estimacionesDeCosecha'
+  | 'analisisDeCalidad'
+  | 'defectos'
 
 // Define the cache tags structure
 export const CACHE_TAGS = {
@@ -30,6 +32,12 @@ export const CACHE_TAGS = {
   },
   estimacionesDeCosecha: {
     all: 'estimacionesDeCosecha',
+  },
+  analisisDeCalidad: {
+    all: 'analisisDeCalidad',
+  },
+  defectos: {
+    all: 'defectos',
   },
 } as const;
 

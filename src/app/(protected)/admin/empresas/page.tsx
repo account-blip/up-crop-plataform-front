@@ -1,6 +1,4 @@
-import { Building2 } from "lucide-react"
-import { GlobalTable } from "@/components/table"
-import { empresaColumns } from "./components/empresa-columns"
+import { Building2, MapPinHouseIcon } from "lucide-react"
 import { CreateEmpresaDialog } from "./components/create-empresa-dialog"
 import { getEmpresas } from "@/services/empresa.service"
 import { ExpandableTable } from "@/components/expandable-table"
@@ -18,8 +16,8 @@ export default async function EmpresasPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6 sm:py-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
-                <Building2 className="h-6 w-6 text-primary" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20">
+                <MapPinHouseIcon className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <h1 className="text-3xl font-semibold tracking-tight text-foreground">Gestión de Empresas</h1>

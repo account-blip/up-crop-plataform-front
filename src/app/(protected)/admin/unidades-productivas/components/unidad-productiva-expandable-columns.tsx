@@ -28,7 +28,7 @@ export const unidadProductivaColumnsExpandable = (empresas: Empresa[]): ColumnDe
 
       return (
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => row.toggleExpanded()}>
-          <ChevronRight className={`h-4 w-4 transition-transform ${row.getIsExpanded() ? "rotate-90" : ""}`} />
+          <ChevronRight className={`h-4 w-4 transition-transform text-primary ${row.getIsExpanded() ? "rotate-90" : ""}`} />
         </Button>
       )
     },

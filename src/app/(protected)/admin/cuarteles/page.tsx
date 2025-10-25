@@ -1,5 +1,5 @@
 
-import { HousePlus } from "lucide-react"
+import { HousePlus, MapPin } from "lucide-react"
 import { getCuarteles } from "@/services/cuartel.service"
 import { CreateCuartelDialog } from "./components/create-cuartel-dialog"
 import { getUnidadesProductivas } from "@/services/unidad-especifica.service"
@@ -19,8 +19,8 @@ export default async function CuartelPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6 sm:py-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-titmouse/10 border border-blue-titmouse/20">
-                <HousePlus className="h-6 w-6 text-blue-titmouse" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20">
+                <MapPin className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <h1 className="font-ivypresto text-3xl font-semibold tracking-tight text-december-sky">

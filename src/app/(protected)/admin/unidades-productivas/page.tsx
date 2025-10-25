@@ -19,7 +19,7 @@ export default async function UnidadesProductivasPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6 sm:py-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20">
                 <AlignHorizontalJustifyCenter className="h-5 w-5 text-primary" />
               </div>
               <div>

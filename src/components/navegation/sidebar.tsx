@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { NavUser } from "./nav-user";
 import { useSession } from "next-auth/react";
+import Image from "next/image"
 
 interface SidebarProps {
   userRole?: "user" | "admin" | "superadmin";
@@ -32,16 +33,41 @@ interface SidebarProps {
 export function Sidebar({ userRole = "user" }: SidebarProps) {
   const pathname = usePathname();
   const [adminExpanded, setAdminExpanded] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status  } = useSession();
+
+  if (status === "loading") {
+    return (
+      <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-border bg-sidebar flex items-center justify-center">
+        <span className="text-sm text-muted-foreground">Cargando...</span>
+      </aside>
+    );
+  }
   const user = session?.user;
+  const [analisisExpanded, setAnalisisExpanded] = useState(false);
+
 
   const role = user?.role?.toUpperCase() ?? "USER";
   const isAdmin = role === "ADMIN" || role === "SUPERADMIN";
 
   const mainNavItems = [
-    { href: "/", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/analisis", label: "Análisis de Calidad", icon: FlaskConical }
+    { href: "/", label: "Dashboard", icon: LayoutDashboard }
   ];
+
+  const analisisCalidadNavItems = [
+    {
+      href: "/analisis-de-calidad",
+      label: "Análisis",
+      icon: FlaskConical,
+      roles: ["ADMIN", "SUPERADMIN"],
+    },
+    {
+      href: "/defectos",
+      label: "Defectos",
+      icon: FileText,
+      roles: ["ADMIN", "SUPERADMIN"],
+    },
+  ];
+  
 
   const adminNavItems = [
     {
@@ -85,16 +111,25 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
    <div className="flex h-full flex-col justify-between">
       <div>
         {/* Logo */}
-        <div className="flex h-16 items-center border-b border-border px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Sprout className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="font-serif text-xl font-semibold text-sidebar-foreground">
-              UpCrop
-            </span>
-          </Link>
+        <div className="flex h-16 items-center border-b border-border px-6 ">
+      <Link href="/" className="flex items-center gap-2">
+        {/* 🖼️ Logo */}
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white">
+          <Image
+            src="/logo-up.svg"
+            alt="UpCrop Logo"
+            width={24}
+            height={24}
+            className="object-contain"
+          />
         </div>
+
+        {/* 📝 Nombre */}
+        <span className="font-serif text-xl font-semibold text-sidebar-foreground">
+          UpCrop
+        </span>
+      </Link>
+    </div>
 
         {/* Main Navigation */}
         <nav className="space-y-1 px-3 py-4">
@@ -112,17 +147,74 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
                     : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-5 w-5 text-primary" />
                 {item.label}
               </Link>
             );
           })}
+          {/* 📊 Sección de Análisis de Calidad */}
+<div className="py-4">
+  <button
+    onClick={() => setAnalisisExpanded(!analisisExpanded)}
+    className={cn(
+      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+      analisisExpanded
+        ? "bg-sidebar-accent text-sidebar-accent-foreground"
+        : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+    )}
+  >
+    <div className="flex items-center gap-3">
+      <FlaskConical className="h-5 w-5 text-primary" />
+      Análisis de Calidad
+    </div>
+    <ChevronRight
+      className={cn(
+        "h-4 w-4 transition-transform",
+        analisisExpanded && "rotate-90"
+      )}
+    />
+  </button>
+
+  {analisisExpanded && (
+    <div
+      className="
+        mt-1 ml-4 space-y-1 border-l border-border pl-4
+        overflow-y-auto max-h-64
+        scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent
+        bg-black/10 rounded-lg
+      "
+    >
+      {analisisCalidadNavItems
+        .filter((item) => item.roles.includes(role))
+        .map((item) => {
+          const Icon = item.icon;
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+                isActive
+                  ? "bg-primary/10 text-primary"
+                  : "text-sidebar-foreground/60 hover:bg-sidebar-accent/30 hover:text-sidebar-foreground"
+              )}
+            >
+              <Icon className="h-4 w-4 text-primary" />
+              {item.label}
+            </Link>
+          );
+        })}
+    </div>
+  )}
+</div>
+
         </nav>
 
         {/* Admin Section */}
         {isAdmin && filteredAdminItems.length > 0 && (
           <div className="mt-4">
-            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground text-primary">
               Administración
             </div>
             <button
@@ -134,8 +226,8 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
                   : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
               )}
             >
-              <div className="flex items-center gap-3">
-                <Settings className="h-5 w-5" />
+              <div className="flex items-center gap-3 ">
+                <Settings className="h-5 w-5 text-primary" />
                 Admin
               </div>
               <ChevronRight
@@ -169,7 +261,7 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
                           : "text-sidebar-foreground/60 hover:bg-sidebar-accent/30 hover:text-sidebar-foreground"
                       )}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4 w-4 text-primary" />
                       {item.label}
                     </Link>
                   );

@@ -170,8 +170,10 @@ export default function DashboardPage() {
     unidades: empresa.unidadesProductiva?.length || 0,
     cuarteles: empresa.unidadesProductiva?.reduce((acc, up) => acc + (up.cuarteles?.length || 0), 0) || 0,
   }))
-
-  const colors = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))"]
+  const colors = [
+    "var(--chart-1)",
+  ]
+  
 
   return (
     <div className="min-h-screen bg-background">
@@ -180,7 +182,7 @@ export default function DashboardPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6 sm:py-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20">
                 <BarChart3 className="h-6 w-6 text-primary" />
               </div>
               <div>
@@ -316,8 +318,8 @@ export default function DashboardPage() {
                   <YAxis />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Legend />
-                  <Bar dataKey="unidades" fill="hsl(var(--chart-2))" radius={[8, 8, 0, 0]} />
-                  <Bar dataKey="cuarteles" fill="hsl(var(--chart-3))" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="unidades" fill="var(--chart-1)" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="cuarteles" fill="var(--chart-1)" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
