@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Plataforma SaaS para gestión agrícola de precisión",
   generator: "v0.app",
   icons: {
-    icon: "/logo-up.svg", 
+    icon: "/favicon-upcopin.png", 
   },
 }
 

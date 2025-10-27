@@ -160,7 +160,7 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
         }`}>
           <div className="flex h-28 w-full mt-2 mb-4 items-center justify-center rounded-lg">
             <Image
-              src="/loco-completo-up-crop.svg"
+              src="/logo-up-cropin.png"
               alt="UpCrop Logo"
               width={220}
               height={100}
