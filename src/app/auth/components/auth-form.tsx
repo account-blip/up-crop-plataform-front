@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select'
 import { USER_ROLES, UserRole } from "@/types/user.type"
 import { Empresa } from "@/types/empresa.type"
+import Image from "next/image"
 
 interface AuthFormProps {
   mode?: 'login' | 'register'
@@ -157,6 +158,18 @@ export function AuthForm({ mode = 'login', empresas }: AuthFormProps) {
         <div className={`bg-card rounded-2xl shadow-lg p-6 border-2 border-primary/20 flex flex-col ${
           isLogin ? "h-auto min-h-[400px]" : "h-[600px]"
         }`}>
+          <div className="flex h-28 w-full mt-2 mb-4 items-center justify-center rounded-lg">
+            <Image
+              src="/loco-completo-up-crop.svg"
+              alt="UpCrop Logo"
+              width={220}
+              height={100}
+              className="object-contain"
+              priority
+            />
+          </div>
+
+
           {/* Header */}
           <div className="text-center mb-6 flex-shrink-0">
             <h1 className="text-3xl font-bold text-foreground mb-2">{isLogin ? "Bienvenido" : "Crear Cuenta"}</h1>

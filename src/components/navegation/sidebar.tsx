@@ -114,25 +114,20 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
         <div className="flex h-16 items-center border-b border-border px-6 ">
       <Link href="/" className="flex items-center gap-2">
         {/* 🖼️ Logo */}
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white">
+        <div className="flex h-50 w-50 mt-10 items-center justify-center rounded-lg">
           <Image
-            src="/logo-up.svg"
+            src="/loco-completo-up-crop.svg"
             alt="UpCrop Logo"
-            width={24}
-            height={24}
+            width={200}
+            height={100}
             className="object-contain"
           />
         </div>
-
-        {/* 📝 Nombre */}
-        <span className="font-serif text-xl font-semibold text-sidebar-foreground">
-          UpCrop
-        </span>
       </Link>
     </div>
 
         {/* Main Navigation */}
-        <nav className="space-y-1 px-3 py-4">
+        <nav className="mt-10 space-y-1 px-3 py-4">
           {mainNavItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;

@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "UpCrop - El campo elevado a su máxima expresión",
   description: "Plataforma SaaS para gestión agrícola de precisión",
   generator: "v0.app",
+  icons: {
+    icon: "/logo-up.svg", 
+  },
 }
 
 export default function RootLayout({
