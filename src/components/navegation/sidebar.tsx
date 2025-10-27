@@ -116,7 +116,7 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
         {/* 🖼️ Logo */}
         <div className="flex h-50 w-50 mt-10 items-center justify-center rounded-lg">
           <Image
-            src="/loco-completo-up-crop.png"
+            src="/logo-up-cropin.png"
             alt="UpCrop Logo"
             width={200}
             height={100}
