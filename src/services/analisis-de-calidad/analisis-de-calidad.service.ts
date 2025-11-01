@@ -11,9 +11,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 /* ========================================
    📥 GET ALL (por usuario con paginación)
 ======================================== */
-export const getAnalisisDeCalidad = async (authToken?: string, userId?: string) => {
+export const getAnalisisDeCalidad = async (authToken?: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/analisis-de-calidad/user/${userId}`, {
+    const response = await fetch(`${BASE_URL}/analisis-de-calidad`, {
       headers: await getAuthHeaders(authToken),
       next: {
         tags: [getCacheTag("analisisDeCalidad", "all")],
@@ -22,7 +22,7 @@ export const getAnalisisDeCalidad = async (authToken?: string, userId?: string) 
     const data = await response.json();
 
     if (response.ok) {
-      return data as PaginatedResponse<AnalisisDeCalidad>;
+      return data as AnalisisDeCalidad;
     } else {
       console.error("❌ Error en getAnalisisDeCalidad:", data);
       return null;
@@ -71,18 +71,24 @@ export const createAnalisisDeCalidad = async (
 
     const data = await response.json();
 
-    if (response.ok) {
-      revalidateTag(getCacheTag("analisisDeCalidad", "all"));
-      return data as AnalisisDeCalidad;
-    } else {
+    // ✅ Si el backend responde con error (400, 404, etc.)
+    if (!response.ok) {
       console.error("❌ Error en createAnalisisDeCalidad:", data);
-      return null;
+      return {
+        error: data?.message || "Error al crear el análisis.",
+        statusCode: data?.statusCode || response.status,
+      };
     }
-  } catch (error) {
+
+    // ✅ Éxito
+    revalidateTag(getCacheTag("analisisDeCalidad", "all"));
+    return data as AnalisisDeCalidad;
+  } catch (error: any) {
     console.error("❌ Error en createAnalisisDeCalidad:", error);
-    return null;
+    return { error: error.message || "Error de conexión con el servidor." };
   }
 };
+
 
 /* ========================================
    ✍️ UPDATE

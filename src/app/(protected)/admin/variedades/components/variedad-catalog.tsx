@@ -7,12 +7,14 @@ import { Button } from "@/components/ui/button"
 import type { Variedad } from "@/types/variedad.type"
 import { VariedadCard } from "./variedad-card"
 import { Sparkles } from "lucide-react"
+import { Especie } from "@/types/especie.type"
 
 interface VariedadCatalogProps {
   variedades: Variedad[]
+  especies: Especie[]
 }
 
-export function VariedadCatalog({ variedades }: VariedadCatalogProps) {
+export function VariedadCatalog({ variedades, especies }: VariedadCatalogProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
 
@@ -72,7 +74,7 @@ export function VariedadCatalog({ variedades }: VariedadCatalogProps) {
           }
         >
           {filteredVariedades.map((variedad) => (
-            <VariedadCard key={variedad.id} variedad={variedad} viewMode={viewMode} />
+            <VariedadCard key={variedad.id} variedad={variedad} viewMode={viewMode} especies={especies} />
           ))}
         </div>
       )}

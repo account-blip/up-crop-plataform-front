@@ -19,10 +19,18 @@ import { Variedad } from '@/types/variedad.type';
 import { UpdateVaridadSchemaType, updateVariedadSchema } from '@/schemas/variedad.schema';
 import { updateVariedadAction } from '@/actions/variedad/update-variedad.action';
 import { Pencil } from 'lucide-react';
+import { Especie } from '@/types/especie.type';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 
 
-export function UpdateVariedadDialog({ variedad }: { variedad: Variedad }) {
+export function UpdateVariedadDialog({ variedad, especies }: { variedad: Variedad, especies: Especie[] }) {
 
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
@@ -31,6 +39,7 @@ export function UpdateVariedadDialog({ variedad }: { variedad: Variedad }) {
     resolver: zodResolver(updateVariedadSchema),
     defaultValues: {
       nombre: variedad.nombre || '',
+      especieId: variedad.especie.id || ''
     },
   });
 
@@ -78,6 +87,33 @@ export function UpdateVariedadDialog({ variedad }: { variedad: Variedad }) {
                   <FormControl>
                     <Input disabled={isPending} {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="especieId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Especie perteneciente</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona una especie" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {especies.map((especie) => (
+                        <SelectItem key={especie.id} value={String(especie.id)}>
+                          {especie.nombre}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

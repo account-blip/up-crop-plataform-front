@@ -12,10 +12,12 @@ import type { Variedad } from "@/types/variedad.type"
 import { MoreVertical, Sparkles } from "lucide-react"
 import { UpdateVariedadDialog } from "./update-variedad-dialog"
 import { DeleteVariedadDialog } from "./delete-variedad-dialog"
+import { Especie } from "@/types/especie.type"
 
 interface VariedadCardProps {
   variedad: Variedad
   viewMode: "grid" | "list"
+  especies: Especie[]
 }
 
 // Generate a consistent color based on the variedad name
@@ -35,7 +37,7 @@ function getVariedadColor(nombre: string): string {
   return colors[hash % colors.length]
 }
 
-export function VariedadCard({ variedad, viewMode }: VariedadCardProps) {
+export function VariedadCard({ variedad, viewMode, especies }: VariedadCardProps) {
   const gradientColor = getVariedadColor(variedad.nombre)
 
   if (viewMode === "list") {
@@ -62,7 +64,7 @@ export function VariedadCard({ variedad, viewMode }: VariedadCardProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[160px]">
               <DropdownMenuLabel className="text-sm">Acciones</DropdownMenuLabel>
-              <UpdateVariedadDialog variedad={variedad} />
+              <UpdateVariedadDialog variedad={variedad} especies={especies} />
               <DeleteVariedadDialog variedad={variedad} />
             </DropdownMenuContent>
           </DropdownMenu>
@@ -93,7 +95,7 @@ export function VariedadCard({ variedad, viewMode }: VariedadCardProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[160px]">
               <DropdownMenuLabel className="text-sm">Acciones</DropdownMenuLabel>
-              <UpdateVariedadDialog variedad={variedad} />
+              <UpdateVariedadDialog variedad={variedad} especies={especies} />
               <DeleteVariedadDialog variedad={variedad} />
             </DropdownMenuContent>
           </DropdownMenu>

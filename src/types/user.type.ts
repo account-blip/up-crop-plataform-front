@@ -1,3 +1,4 @@
+import { AnalisisDeCalidad } from "./analisis-de-calidad/analisis-de-calidad.type";
 import { Empresa } from "./empresa.type";
 import { EstimacionDeCosecha } from "./estimacion-de-cosecha.type";
 
@@ -14,6 +15,7 @@ export type User = {
   role: UserRole;
   empresa: Empresa;
   estimacionesDeCosecha: EstimacionDeCosecha[];
+  analisis: AnalisisDeCalidad[];
   deletedAt?: string | null;
   createdAt: string;
   updatedAt: string;

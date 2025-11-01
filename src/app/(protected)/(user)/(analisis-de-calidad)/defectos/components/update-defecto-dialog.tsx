@@ -118,7 +118,7 @@ export function UpdateDefectoDialog({ defecto }: { defecto: Defecto }) {
               )}
             />
             <Button className="w-full" type="submit" disabled={isPending}>
-              Editar Portainjerto
+              Editar
             </Button>
           </form>
         </Form>

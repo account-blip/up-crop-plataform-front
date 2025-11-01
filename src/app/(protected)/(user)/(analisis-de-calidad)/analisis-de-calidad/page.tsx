@@ -5,21 +5,31 @@ import { getVariedades } from "@/services/variedad.service"
 import { getDefectos } from "@/services/analisis-de-calidad/defecto.service"
 import { CreateAnalisisDeCalidadDialog } from "./components/create-analisis-de-calidad-dialog"
 import { getCuarteles } from "@/services/cuartel.service"
-import AnalisisDeCalidadTable from "./components/unidad-productiva-table"
+import AnalisisDeCalidadTable from "./components/analisis-de-calidad-table"
+import { getEspecies } from "@/services/especie.service"
+import { getEtapaInpeccion } from "@/services/analisis-de-calidad/etapa-inspeccion.service"
+import { getUnidadInpeccion } from "@/services/analisis-de-calidad/unidad-inspeccion.service"
 
 export default async function AnalisisDeCalidadPage() {
   const session = await auth(); 
   const userId = session?.user?.id;
   const accessToken = session?.token;
 
-  const analisisDeCalidad = await getAnalisisDeCalidad(accessToken, userId || '')
-  const variedades = await getVariedades(accessToken)
+  const analisisResult = await getAnalisisDeCalidad(accessToken)
+
+  const analisisDeCalidad = Array.isArray(analisisResult)
+    ? analisisResult
+    : analisisResult
+    ? [analisisResult]
+    : []
+  
+  const especies = await getEspecies(accessToken)
   const cuarteles = await getCuarteles(accessToken, userId || '')
   const defectos = await getDefectos(accessToken, userId || '')
-  
+  const etapas = await getEtapaInpeccion(accessToken, userId || '')
+  const unidades = await getUnidadInpeccion(accessToken, userId || '')
 
 
-console.log(analisisDeCalidad)
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,7 +45,7 @@ console.log(analisisDeCalidad)
                 <p className="text-sm text-muted-foreground">Administra y organiza tus Analisis de Calidad</p>
               </div>
             </div>
-            <CreateAnalisisDeCalidadDialog variedades={variedades?.data || []} cuarteles={cuarteles?.data || []} defectos={defectos?.data || []}/>
+            <CreateAnalisisDeCalidadDialog especies={especies?.data || []} cuarteles={cuarteles?.data || []} defectos={defectos?.data || []} etapas={etapas?.data || []} unidades={unidades?.data || []}/>
           </div>
         </div>
       </div>
@@ -43,7 +53,12 @@ console.log(analisisDeCalidad)
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
             <AnalisisDeCalidadTable
-            analisisDeCalidad={analisisDeCalidad?.data || []}
+            analisisDeCalidad={analisisDeCalidad || []}
+            etapas={etapas?.data || []}
+            cuarteles={cuarteles?.data || []}
+            unidades={unidades?.data || []}
+            especies={especies?.data || []}
+            defectos={defectos?.data || []}
             />
         </div>
       </div>

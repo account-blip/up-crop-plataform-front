@@ -1,14 +1,14 @@
 
 import { BoxIcon } from "lucide-react"
-import { GlobalTable } from "@/components/table"
 import { getVariedades } from "@/services/variedad.service"
 import { CreateVariedadDialog } from "./components/create-variedad-dialog"
-import { variedadColumns } from "./components/variedad-columns"
 import { VariedadCatalog } from "./components/variedad-catalog"
+import { getEspecies } from "@/services/especie.service"
 
 
 export default async function VariedadPage() {
   const variedades = await getVariedades()
+  const especies = await getEspecies()
 
 
   return (
@@ -29,14 +29,14 @@ export default async function VariedadPage() {
                 </p>
               </div>
             </div>
-            <CreateVariedadDialog />
+            <CreateVariedadDialog especies={especies?.data || []}/>
           </div>
         </div>
       </div>
   
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="rounded-xl border border-polar-bear/10 bg-cocos-black/30 p-6 shadow-xl">
-        <VariedadCatalog variedades={variedades?.data || []} />
+        <VariedadCatalog variedades={variedades?.data || []} especies={especies?.data || []} />
         </div>
       </div>
     </div>

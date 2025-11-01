@@ -23,8 +23,16 @@ import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { variedadSchema, VariedadSchemaType } from '@/schemas/variedad.schema';
 import { createVariedadAction } from '@/actions/variedad/create-variedad.action';
+import { Especie } from '@/types/especie.type';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
-export function CreateVariedadDialog() {
+export function CreateVariedadDialog({especies}:{especies:Especie[]}) {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
@@ -34,6 +42,7 @@ export function CreateVariedadDialog() {
     resolver: zodResolver(variedadSchema),
     defaultValues: {
       nombre: '',
+      especieId: ''
     },
   });
 
@@ -80,6 +89,33 @@ export function CreateVariedadDialog() {
                   <FormControl>
                     <Input disabled={isPending} {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+                        <FormField
+              control={form.control}
+              name="especieId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Especie perteneciente</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona una especie" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {especies.map((especie) => (
+                        <SelectItem key={especie.id} value={String(especie.id)}>
+                          {especie.nombre}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

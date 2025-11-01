@@ -1,3 +1,4 @@
+import { Especie } from "./especie.type";
 import { UnidadProductiva } from "./unidad-productiva.type";
 import { User } from "./user.type";
 
@@ -6,6 +7,7 @@ export type Empresa = {
     nombre: string;
     users: User[];
     unidadesProductiva: UnidadProductiva[];
+    especies: Especie[];
     deletedAt?: string | null;
     createdAt: string;
     updatedAt: string;

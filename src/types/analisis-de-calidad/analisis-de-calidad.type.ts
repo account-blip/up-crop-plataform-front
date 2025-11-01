@@ -1,21 +1,24 @@
-import { Variedad } from "../variedad.type";
 import { Cuartel } from "../cuartel.type";
-import { Calibre } from "./calibre.type";
-import { Color } from "./color.type";
-import { ControlCalidad } from "./control-calidad.type";
 import { TemperaturaDia } from "./temperatura-dia.type";
+import { EtapaInspeccion } from "./etapa-inspeccion.type";
+import { UnidadInspeccion } from "./unidad-inspeccion.type";
+import { AnalisisUnidadInspeccion } from "./analisis-unidad-inspeccion.entity";
+import { Empresa } from "../empresa.type";
+import { User } from "../user.type";
 
 export type AnalisisDeCalidad = {
   id: string;
-  fecha: string;
+  fecha: Date;
   temperaturaBins?: number | null;
   brix?: number | null;
-  variedad: Variedad;
+  universoMuestra: number;
   cuartel: Cuartel;
-  calibres: Calibre[];
-  colores: Color[];
-  controlesCalidad: ControlCalidad[];
+  etapaInspeccion: EtapaInspeccion;
+  unidadInspeccion: UnidadInspeccion;
+  unidadesInspeccion: AnalisisUnidadInspeccion[];
   temperaturasDia: TemperaturaDia[];
+  empresa: Empresa;
+  user:User;
   deletedAt?: string | null;
   createdAt: string;
   updatedAt: string;

@@ -8,13 +8,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Variedad } from "@/types/variedad.type"
 import type { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
-import { UpdateVariedadDialog } from "./update-variedad-dialog"
-import { DeleteVariedadDialog } from "./delete-variedad-dialog"
+import { UnidadInspeccion } from "@/types/analisis-de-calidad/unidad-inspeccion.type"
+import { UpdateUnidadInspeccionDialog } from "./update-unidad-inspeccion-dialog"
+import { DeleteUnidadInspeccionDialog } from "./delete-unidad-inspeccion-dialog"
 
-export const variedadColumns: ColumnDef<Variedad>[] = [
+export const unidadInspeccionColumns: ColumnDef<UnidadInspeccion>[] = [
   {
     accessorKey: "nombre",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Nombre" />,
@@ -23,7 +23,7 @@ export const variedadColumns: ColumnDef<Variedad>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const variedad = row.original
+      const unidad = row.original
 
       return (
         <DropdownMenu>
@@ -35,8 +35,8 @@ export const variedadColumns: ColumnDef<Variedad>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-[160px]">
             <DropdownMenuLabel className="text-sm">Acciones</DropdownMenuLabel>
-            <UpdateVariedadDialog variedad={variedad} />
-            <DeleteVariedadDialog variedad={variedad} />
+            <UpdateUnidadInspeccionDialog unidadInspeccion={unidad} />
+            <DeleteUnidadInspeccionDialog unidadInspeccion={unidad} />
           </DropdownMenuContent>
         </DropdownMenu>
       )

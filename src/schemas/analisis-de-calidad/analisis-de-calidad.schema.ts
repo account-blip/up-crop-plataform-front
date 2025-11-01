@@ -1,93 +1,93 @@
 import { z } from "zod"
 
 /* ========================================
- 🧭 CONTROL DE CALIDAD
+ 🧭 DEFECTO
 ======================================== */
-export const TIPO_CONTROL = ['CAMPO', 'DESPACHO'] as const
-export type TipoControl = (typeof TIPO_CONTROL)[number]
-
-export const ControlCalidadSchema = z.object({
-  tipo: z.enum(TIPO_CONTROL).describe('El tipo de control es obligatorio'),
-  analisisDeCalidadId: z.string().optional(),
-  defectos: z
-    .array(
-      z.object({
-        id: z.string().min(1, 'El defecto es obligatorio'),
-        porcentaje: z
-          .number()
-          .min(0, 'Debe ingresar un porcentaje'),
-      })
-    )
-    .nonempty('Debe agregar al menos un defecto'),
-});
-
-
-export type ControlCalidadSchemaType = z.infer<typeof ControlCalidadSchema>
+export const DefectoCantidadSchema = z.object({
+  id: z.string().min(1, 'El defecto es obligatorio'),
+  porcentaje: z
+    .number()
+    .min(0, 'El porcentaje debe ser mayor o igual a 0')
+    .max(100, 'El porcentaje no puede superar 100'),
+})
+export type DefectoCantidadSchemaType = z.infer<typeof DefectoCantidadSchema>
 
 /* ========================================
- 🧭 CALIBRE
+ 🧭 CONTROL DE CALIDAD
 ======================================== */
-export const CalibreSchema = z.object({
-  fecha: z.string().min(1, 'La fecha es obligatoria'),
-  calibre: z.string().min(1, 'El calibre es obligatorio'),
-  cantidad: z.number().optional(),
-  porcentaje: z.number().optional(),
-  analisisDeCalidadId: z.string().optional()
+export const ControlCalidadSchema = z.object({
+  defectos: z
+    .array(DefectoCantidadSchema)
+    .nonempty('Debe agregar al menos un defecto'),
 })
-
-export type CalibreSchemaType = z.infer<typeof CalibreSchema>
+export type ControlCalidadSchemaType = z.infer<typeof ControlCalidadSchema>
 
 /* ========================================
  🧭 COLOR
 ======================================== */
 export const ColorSchema = z.object({
-  fecha: z.string().min(1, 'La fecha es obligatoria'),
   color: z.string().min(1, 'El color es obligatorio'),
-  cantidad: z.number().optional(),
-  porcentaje: z.number().optional(),
-  analisisDeCalidadId: z.string().optional()
+  cantidad: z.number().min(0).optional(),
 })
-
 export type ColorSchemaType = z.infer<typeof ColorSchema>
 
 /* ========================================
- 🧭 TEMPERATURA HORA
+ 🧭 CALIBRE
 ======================================== */
-export const TemperaturaHoraSchema = z.object({
-  hora: z.string().min(1, 'La hora es obligatoria'),
-  fecha: z.string().min(1, 'La fecha es obligatoria'),
-  temperaturaPulpa: z.number().optional(),
-  temperaturaDiaId: z.string().optional()
+export const CalibreSchema = z.object({
+  calibre: z.string().min(1, 'El calibre es obligatorio'),
+  cantidad: z.coerce.number().optional() as unknown as z.ZodNumber,
 })
-
-export type TemperaturaHoraSchemaType = z.infer<typeof TemperaturaHoraSchema>
+export type CalibreSchemaType = z.infer<typeof CalibreSchema>
 
 /* ========================================
- 🧭 TEMPERATURA DÍA
+ 🧭 UNIDAD DE INSPECCIÓN
 ======================================== */
-export const TemperaturaDiaSchema = z.object({
-  fecha: z.string().min(1, 'La fecha es obligatoria'),
-  temperatura: z.number().optional(),
-  analisisDeCalidadId: z.string().optional(),
-  temperaturasHora: z.array(TemperaturaHoraSchema).optional(),
+export const UnidadInspeccionSchema = z.object({
+  id: z.string().min(1, 'Debe seleccionar una unidad'),
+  cantidad: z.number().min(1, 'Debe indicar una cantidad válida'),
 })
-
-export type TemperaturaDiaSchemaType = z.infer<typeof TemperaturaDiaSchema>
+export type UnidadInspeccionSchemaType = z.infer<typeof UnidadInspeccionSchema>
 
 /* ========================================
- 🧭 ANALISIS DE CALIDAD (principal)
+ 🧭 INSPECCIÓN POR UNIDAD
+======================================== */
+export const InspeccionUnidadSchema = z.object({
+  indice: z.number().optional(),
+
+  calibres: z
+    .array(CalibreSchema)
+    .nonempty('Debe agregar al menos un calibre'),
+
+  colores: z
+    .array(ColorSchema)
+    .nonempty('Debe agregar al menos un color'),
+
+  controlesCalidad: z
+    .array(ControlCalidadSchema)
+    .nonempty('Debe agregar al menos un control de calidad'),
+
+  variedadId: z.string().min(1, 'La variedad es obligatoria'),
+  especieId: z.string().min(1, 'La especie es obligatoria'),
+  temperaturaBins: z.coerce.number().optional() as unknown as z.ZodNumber,
+  brix: z.coerce.number().optional() as unknown as z.ZodNumber,
+  
+})
+export type InspeccionUnidadSchemaType = z.infer<typeof InspeccionUnidadSchema>
+
+/* ========================================
+ 🧪 ANALISIS DE CALIDAD (principal)
 ======================================== */
 export const AnalisisDeCalidadSchema = z.object({
   fecha: z.string().min(1, 'La fecha es obligatoria'),
-  temperaturaBins: z.number().optional(),
-  brix: z.number().optional(),
-  variedadId: z.string().min(1, 'La variedad es obligatoria'),
   cuartelId: z.string().min(1, 'El cuartel es obligatorio'),
-
-  // Relaciones anidadas
-  calibres: z.array(CalibreSchema).optional(),
-  colores: z.array(ColorSchema).optional(),
-  controlesCalidad: z.array(ControlCalidadSchema).optional()
+  etapaId: z.string().min(1, 'La etapa es obligatoria'),
+  unidadInspeccion: UnidadInspeccionSchema,
+  universoMuestra: z.number().min(1, 'El universo de muestra es obligatorio'),
+  // 👇 N inspecciones (según cantidad)
+  inspecciones: z
+    .array(InspeccionUnidadSchema)
+    .nonempty('Debe crear al menos una inspección'),
 })
 
 export type AnalisisDeCalidadSchemaType = z.infer<typeof AnalisisDeCalidadSchema>
@@ -116,7 +116,6 @@ const UpdateColorItemSchema = z.object({
 })
 
 const UpdateControlCalidadItemSchema = z.object({
-  tipo: z.enum(TIPO_CONTROL).optional(),
   defectos: z.string().optional(),
   porcentaje_defecto_calidad: z.coerce.number().min(0).max(100).optional(),
   porcentaje_defecto_condicion: z.coerce.number().min(0).max(100).optional(),
@@ -146,7 +145,7 @@ export type UpdateAnalisisDeCalidadSchemaType = z.infer<typeof UpdateAnalisisDeC
 /* ================================
    Schema (DELETE) con confirmación
 ================================ */
-export const DeleteAnalisisDeCalidadSchema = z.object({
+export const deleteAnalisisDeCalidadSchema = z.object({
   confirmation: z
     .string()
     .refine((v) => v === "Eliminar Análisis de Calidad", {
@@ -154,4 +153,4 @@ export const DeleteAnalisisDeCalidadSchema = z.object({
     }),
 })
 
-export type DeleteAnalisisDeCalidadSchemaType = z.infer<typeof DeleteAnalisisDeCalidadSchema>
+export type DeleteAnalisisDeCalidadSchemaType = z.infer<typeof deleteAnalisisDeCalidadSchema>

@@ -124,30 +124,22 @@
     @apply bg-background text-foreground;
   }
 }
-/* =========================== */
-/* Scrollbar negro minimalista */
-/* =========================== */
-
-.scrollbar-custom::-webkit-scrollbar {
-  width: 8px;
+/* 🎨 Scrollbar oscuro con detalles azules */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.scrollbar-custom::-webkit-scrollbar-track {
-  background: transparent;
+::-webkit-scrollbar-track {
+  background: #1D1D1D;
+  border-radius: 10px;
 }
 
-.scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: black;
-  border-radius: 4px;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2a2a2a, #3b3bff60);
+  border-radius: 10px;
+  border: 2px solid #1D1D1D;
 }
 
-.scrollbar-custom::-webkit-scrollbar-thumb:hover {
-  background-color: #333;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #485FFF, #3b3bff);
 }
-
-/* Para Firefox */
-.scrollbar-custom {
-  scrollbar-width: thin;
-  scrollbar-color: black transparent;
-}
- 

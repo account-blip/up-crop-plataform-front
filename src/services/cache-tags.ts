@@ -8,6 +8,9 @@ export type ServiceName =
   | 'estimacionesDeCosecha'
   | 'analisisDeCalidad'
   | 'defectos'
+  | 'especies'
+  | 'etapaInspeccion'
+  | 'unidadInspeccion'
 
 // Define the cache tags structure
 export const CACHE_TAGS = {
@@ -38,6 +41,15 @@ export const CACHE_TAGS = {
   },
   defectos: {
     all: 'defectos',
+  },
+  especies: {
+    all: 'especies',
+  },
+  etapaInspeccion: {
+    all: 'etapaInspeccion',
+  },
+  unidadInspeccion: {
+    all: 'unidadInspeccion',
   },
 } as const;
 

@@ -10,128 +10,50 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 
 // Mock data - replace with actual API call
 async function getEmpresasData() {
-  const mockData: Empresa[] = [
+  const mockData = [
     {
       id: "1",
       nombre: "Empresa Agrícola del Sur",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
       unidadesProductiva: [
         {
           id: "up-1",
-          nombre: "Unidad Productiva Norte",
-          empresa: {} as any,
-          cuarteles: [
-            {
-              id: "c-1",
-              nombre: "Cuartel A1",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-            {
-              id: "c-2",
-              nombre: "Cuartel A2",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-            {
-              id: "c-3",
-              nombre: "Cuartel A3",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-          ],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          nombre: "Unidad Norte",
+          cuarteles: [{ id: "c-1", nombre: "Cuartel A1" }, { id: "c-2", nombre: "Cuartel A2" }],
         },
         {
           id: "up-2",
-          nombre: "Unidad Productiva Sur",
-          empresa: {} as any,
-          cuarteles: [
-            {
-              id: "c-4",
-              nombre: "Cuartel B1",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-            {
-              id: "c-5",
-              nombre: "Cuartel B2",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-          ],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          nombre: "Unidad Sur",
+          cuarteles: [{ id: "c-3", nombre: "Cuartel B1" }],
         },
       ],
       users: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     },
     {
       id: "2",
       nombre: "Agroindustrial Central",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
       unidadesProductiva: [
         {
           id: "up-3",
-          nombre: "Unidad Productiva Este",
-          empresa: {} as any,
-          cuarteles: [
-            {
-              id: "c-6",
-              nombre: "Cuartel C1",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-            {
-              id: "c-7",
-              nombre: "Cuartel C2",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-            {
-              id: "c-8",
-              nombre: "Cuartel C3",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-          ],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          nombre: "Unidad Este",
+          cuarteles: [{ id: "c-4", nombre: "Cuartel C1" }, { id: "c-5", nombre: "Cuartel C2" }],
         },
         {
           id: "up-4",
-          nombre: "Unidad Productiva Oeste",
-          empresa: {} as any,
-          cuarteles: [
-            {
-              id: "c-9",
-              nombre: "Cuartel D1",
-              unidadesProductiva: {} as any,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-          ],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          nombre: "Unidad Oeste",
+          cuarteles: [{ id: "c-6", nombre: "Cuartel D1" }],
         },
       ],
       users: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     },
   ]
+  return mockData as unknown as Empresa[]
 
-  return mockData
 }
+
 
 export default function DashboardPage() {
   const [empresas, setEmpresas] = useState<Empresa[]>([])
