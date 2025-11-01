@@ -60,21 +60,26 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          'bg-[#1D1D1D] fixed top-1/2 left-1/2 z-50 grid w-full max-w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-[#2a2a2a] shadow-2xl p-0 duration-200',
+          // 🩶 Fondo con leve transparencia y bordes suaves
+          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-md translate-x-[-50%] translate-y-[-50%] rounded-2xl border border-[#2a2a2a] bg-[#101010]/95 backdrop-blur-md shadow-2xl p-6 text-center',
           'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
           className
         )}
         style={{ maxHeight: '95vh' }}
         {...props}
       >
-        {children}
+
+        {/* 📦 Contenido */}
+        <div className="space-y-4">{children}</div>
+
+        {/* ❌ Botón de cierre */}
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 text-[#999] hover:text-white transition"
+            className="absolute top-4 right-4 text-[#aaa] hover:text-white transition-colors"
           >
-            <XIcon />
-            <span className="sr-only">Close</span>
+            <XIcon className="h-5 w-5" />
+            <span className="sr-only">Cerrar</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>

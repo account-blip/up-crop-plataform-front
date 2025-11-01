@@ -334,7 +334,7 @@ export function Sidebar({ userRole = "user" }: SidebarProps) {
         <div className="border-t border-border p-4 sticky bottom-0 bg-sidebar">
           <NavUser
             userNav={{
-              avatar: user?.image ?? "",
+              avatar: "/user-avatar.png",
               email: user?.email ?? "",
               name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`,
               role: user?.role || "ADMIN",

@@ -40,7 +40,7 @@ export function NavUser({
       <DropdownMenuTrigger asChild className="group cursor-pointer">
         <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2 bg-black hover:bg-zinc-900 transition-colors border border-white/10 text-white">
           <Avatar className="h-9 w-9 rounded-xl border border-white/20">
-            <AvatarImage src={userNav.avatar || "/placeholder.svg"} alt={userNav.name} />
+            <AvatarImage src={"/user-avatar.jpg"} alt={userNav.name} />
             <AvatarFallback className="rounded-xl bg-white/20 text-[10px] font-semibold uppercase text-white">
               {userNav.name
                 .split(" ")
